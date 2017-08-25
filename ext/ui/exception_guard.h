@@ -13,7 +13,7 @@
 // coresponding to libYUI hierarchy
 #define YEXCEPTION_CATCH \
   } catch (YUIException e) { \
-    rb_raise(rb_eRuntimeError,e.msg().c_str()); \
+    rb_raise(rb_eRuntimeError,"%s",e.msg().c_str()); \
   }
 
 #endif

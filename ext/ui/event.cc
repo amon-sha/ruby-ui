@@ -69,7 +69,7 @@ VALUE convert_event(const YEvent * event)
     break;
   }
   default: //TODO
-      rb_raise(rb_eNotImpError, (std::string("Unknown event type ") + YEvent::toString(event->eventType())).c_str());
+      rb_raise(rb_eNotImpError, "%s", (std::string("Unknown event type ") + YEvent::toString(event->eventType())).c_str());
   }
   return result;
 }
