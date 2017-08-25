@@ -35,7 +35,7 @@ dealloc(YDialog *dlg)
   // At exit the UI finalizer deletes all dialogs anyway so
   // we don't care.
   if (dlg->isTopmostDialog() && dlg->isValid() && dlg->destroy(false)) {
-    yuiDebug() << "destroy ruby object for dialog" << dlg << std::endl;
+  //  yuiDebug() << "destroy ruby object for dialog" << dlg << std::endl;
 
   //  dlg->deleteTopmostDialog();
     sDialogStack.pop_back();
