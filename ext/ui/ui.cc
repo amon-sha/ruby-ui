@@ -34,6 +34,7 @@
 #include "spacing.h"
 #include "squash.h"
 #include "ui_builder.h"
+#include "ui_log.h"
 
 using std::string;
 
@@ -154,7 +155,8 @@ void Init_ui() {
 
   init_ui_ui_builder();
 
-  YUILog::enableDebugLogging();
+  init_ui_ui_log();
+
   /* this tracks C++ objects to ruby objects */
   widget_object_map_init();
 }
