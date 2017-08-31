@@ -24,6 +24,7 @@
 #include "replace_point.h"
 #include "rich_text.h"
 #include "selection_box.h"
+#include "combo_box.h"
 #include "spacing.h"
 #include "squash.h"
 #include "replace_point.h"
@@ -259,6 +260,33 @@ static VALUE create_selection_box(VALUE self, VALUE parent, VALUE label)
 /*
  * @visibility private
  */
+static VALUE create_combo_box(int argc, VALUE *argv, VALUE self)//, VALUE parent, VALUE label)
+{
+  YEXCEPTION_TRY
+
+  VALUE parent;
+  VALUE label;
+  VALUE editable;
+
+  rb_scan_args(argc, argv, "21", &parent, &label, &editable);
+
+  YWidget *ptr = ui_unwrap_widget(parent);
+
+  YComboBox *box;
+  if (NIL_P(editable))
+    box = YUI::widgetFactory()->createComboBox(ptr, StringValuePtr(label));
+  else
+    box = YUI::widgetFactory()->createComboBox(ptr, StringValuePtr(label), RTEST(editable));
+
+  VALUE object = ui_wrap_combo_box(box);
+  widget_object_map_add(box, object);
+  return object;
+  YEXCEPTION_CATCH
+}
+
+/*
+ * @visibility private
+ */
 static VALUE create_hstretch(VALUE self, VALUE parent)
 {
   YEXCEPTION_TRY
@@ -448,6 +476,7 @@ void init_ui_ui_builder() {
   rb_define_singleton_method(mUIBuilder, "create_radio_button", RUBY_METHOD_FUNC(create_radio_button), 2);
   rb_define_singleton_method(mUIBuilder, "create_rich_text", RUBY_METHOD_FUNC(create_rich_text), 2);
   rb_define_singleton_method(mUIBuilder, "create_selection_box", RUBY_METHOD_FUNC(create_selection_box), 2);
+  rb_define_singleton_method(mUIBuilder, "create_combo_box", RUBY_METHOD_FUNC(create_combo_box), -1);
 
   rb_define_singleton_method(mUIBuilder, "create_radio_button_group", RUBY_METHOD_FUNC(create_radio_button_group), 1);
   rb_define_singleton_method(mUIBuilder, "create_replace_point", RUBY_METHOD_FUNC(create_replace_point), 1);

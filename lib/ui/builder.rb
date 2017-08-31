@@ -11,7 +11,8 @@ module UI
                           :hvcenter, :margin_box, :radio_button_group]
     LEAF_ELEMENTS = [:push_button, :input_field, :check_box, :radio_button,
                      :hspacing, :vspacing, :hstretch, :vstretch,
-                     :label, :progress_bar, :rich_text, :selection_box]
+                     :label, :progress_bar, :rich_text, :selection_box,
+                     :combo_box]
 
 
     # @visibility private

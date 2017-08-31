@@ -35,9 +35,9 @@ module UI
     end
 
     # @return the (first) selected item or nil if none is selected.
-    def selected_item
-      selected_items.first
-    end
+#    def selected_item
+#      selected_items.first
+#    end
 
   end
 end

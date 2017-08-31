@@ -170,6 +170,15 @@ deselect_all_items(VALUE self)
   YEXCEPTION_CATCH
 }
 
+static VALUE
+selected_item(VALUE self)
+{
+  YEXCEPTION_TRY
+  YSelectionWidget *ptr = ui_unwrap_selection_widget(self);
+  VALUE item = widget_object_map_for(ptr->selectedItem());
+  return item;
+  YEXCEPTION_CATCH
+}
 
 
 VALUE cUISelectionWidget;
@@ -184,6 +193,7 @@ void init_ui_selection_widget()
   rb_define_method(klass, "each_item", RUBY_METHOD_FUNC(each_item), 0);
   rb_define_method(klass, "select_item", RUBY_METHOD_FUNC(select_item), -1);
   rb_define_method(klass, "deselect_all_items", RUBY_METHOD_FUNC(deselect_all_items), 0);
+  rb_define_method(klass, "selected_item", RUBY_METHOD_FUNC(selected_item), 0);
   cUISelectionWidget = klass;
 }
 
