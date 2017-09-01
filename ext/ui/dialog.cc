@@ -160,15 +160,23 @@ resize(VALUE self)
  *     end
  */
 static VALUE
-wait_for_event(VALUE self)
+wait_for_event(int argc, VALUE *argv, VALUE self)
 {
   YEXCEPTION_TRY
+
+  VALUE timeout;
+
+  rb_scan_args(argc, argv, "01", &timeout);
 
   YDialog *ptr = ui_unwrap_dialog(self);
   new CallbackFilter(ptr); //see filter documentation
   YEvent *ev = 0L;
   do {
-    ev = ptr->waitForEvent();
+    if (NIL_P(timeout))
+      ev = ptr->waitForEvent();
+    else
+      ev = ptr->waitForEvent(NUM2INT(timeout));
+
     if (!rb_block_given_p())
       return convert_event(ev);
   } while (rb_yield(convert_event(ev)) != Qfalse);
@@ -210,7 +218,7 @@ void init_ui_dialog()
   VALUE klass = rb_define_class_under(ui, "Dialog", cUIWidget);
   cUIDialog = klass;
 
-  rb_define_method(klass, "wait_for_event", RUBY_METHOD_FUNC(wait_for_event), 0);
+  rb_define_method(klass, "wait_for_event", RUBY_METHOD_FUNC(wait_for_event), -1);
   rb_define_method(klass, "destroy!", RUBY_METHOD_FUNC(destroy), 0);
   rb_define_method(klass, "open", RUBY_METHOD_FUNC(_open), 0);
   rb_define_method(klass, "open?", RUBY_METHOD_FUNC(is_open), 0);
