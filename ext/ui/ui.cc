@@ -30,6 +30,7 @@
 #include "replace_point.h"
 #include "rich_text.h"
 #include "selection_box.h"
+#include "multi_selection_box.h"
 #include "combo_box.h"
 #include "selection_widget.h"
 #include "spacing.h"
@@ -153,6 +154,7 @@ void Init_ui() {
   init_ui_rich_text();
   init_ui_selection_widget();
   init_ui_selection_box();
+  init_ui_multi_selection_box();
   init_ui_combo_box();
 
   init_ui_ui_builder();

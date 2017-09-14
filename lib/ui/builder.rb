@@ -12,7 +12,7 @@ module UI
     LEAF_ELEMENTS = [:push_button, :input_field, :check_box, :radio_button,
                      :hspacing, :vspacing, :hstretch, :vstretch,
                      :label, :progress_bar, :rich_text, :selection_box,
-                     :combo_box]
+                     :multi_selection_box, :combo_box]
 
 
     # @visibility private
